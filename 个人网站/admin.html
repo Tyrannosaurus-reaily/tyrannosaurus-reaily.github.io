@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人网站后台维护</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-shell">
+    <div class="site-bg site-bg-admin"></div>
+
+    <header class="admin-header">
+      <div>
+        <p class="eyebrow">Admin Workspace</p>
+        <h1>个人网站后台维护</h1>
+        <p class="admin-hint">
+          在这里改内容，保存后前台页会同步更新。当前版本默认保存到浏览器本地。
+        </p>
+      </div>
+
+      <div class="admin-actions compact">
+        <button id="preview-site" class="button button-secondary" type="button">预览主页</button>
+        <button id="save-data" class="button button-primary" type="button">保存修改</button>
+      </div>
+    </header>
+
+    <main class="admin-grid">
+      <section class="card admin-card">
+        <div class="section-head">
+          <p class="eyebrow">Basic Profile</p>
+          <h2>基础信息</h2>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            姓名
+            <input id="profile-name" type="text" />
+          </label>
+          <label>
+            身份标题
+            <input id="profile-role" type="text" />
+          </label>
+          <label class="span-2">
+            一句话介绍
+            <input id="profile-tagline" type="text" />
+          </label>
+          <label class="span-2">
+            首页简介
+            <textarea id="profile-intro" rows="4"></textarea>
+          </label>
+          <label>
+            地区
+            <input id="profile-location" type="text" />
+          </label>
+          <label>
+            邮箱
+            <input id="profile-email" type="email" />
+          </label>
+          <label class="span-2">
+            个人主页 / GitHub
+            <input id="profile-website" type="text" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="section-head">
+          <p class="eyebrow">About</p>
+          <h2>关于我</h2>
+        </div>
+        <label>
+          摘要
+          <textarea id="about-summary" rows="5"></textarea>
+        </label>
+        <div class="editor-head">
+          <h3>亮点条目</h3>
+          <button class="button button-secondary small" data-add-list="about-points" type="button">新增条目</button>
+        </div>
+        <div id="about-points-editor" class="repeatable-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="editor-head">
+          <div>
+            <p class="eyebrow">Stats</p>
+            <h2>首页数字卡片</h2>
+          </div>
+          <button class="button button-secondary small" data-add-list="highlights" type="button">新增卡片</button>
+        </div>
+        <div id="highlights-editor" class="repeatable-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="editor-head">
+          <div>
+            <p class="eyebrow">Research</p>
+            <h2>研究方向</h2>
+          </div>
+          <button class="button button-secondary small" data-add-list="researchAreas" type="button">新增方向</button>
+        </div>
+        <div id="research-editor" class="repeatable-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="editor-head">
+          <div>
+            <p class="eyebrow">Projects</p>
+            <h2>项目与实践</h2>
+          </div>
+          <button class="button button-secondary small" data-add-list="projects" type="button">新增项目</button>
+        </div>
+        <div id="projects-editor" class="repeatable-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="editor-head">
+          <div>
+            <p class="eyebrow">Publications</p>
+            <h2>论文与成果</h2>
+          </div>
+          <button class="button button-secondary small" data-add-list="publications" type="button">新增成果</button>
+        </div>
+        <div id="publications-editor" class="repeatable-list"></div>
+      </section>
+
+      <section class="card admin-card">
+        <div class="section-head">
+          <p class="eyebrow">Contact</p>
+          <h2>联系方式</h2>
+        </div>
+        <div class="form-grid">
+          <label>
+            邮箱
+            <input id="contact-email" type="text" />
+          </label>
+          <label>
+            微信 / 手机 / 其他
+            <input id="contact-wechat" type="text" />
+          </label>
+          <label>
+            地区
+            <input id="contact-location" type="text" />
+          </label>
+          <label class="span-2">
+            备注
+            <textarea id="contact-note" rows="4"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <aside class="card admin-card sticky">
+        <div class="section-head">
+          <p class="eyebrow">Actions</p>
+          <h2>维护操作</h2>
+        </div>
+
+        <div class="action-stack">
+          <button id="export-data" class="button button-primary" type="button">导出 JSON</button>
+          <label class="file-label">
+            导入 JSON
+            <input id="import-data" type="file" accept=".json" />
+          </label>
+          <button id="reset-data" class="button button-danger" type="button">恢复默认内容</button>
+        </div>
+
+        <div class="status-box" id="save-status">
+          当前状态：尚未保存修改。
+        </div>
+
+        <div class="tips-box">
+          <h3>使用建议</h3>
+          <ul>
+            <li>先在这里改内容，再点“保存修改”。</li>
+            <li>如果要备份网站内容，点“导出 JSON”。</li>
+            <li>如果以后想跨设备同步，我可以继续帮你接数据库后台。</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
